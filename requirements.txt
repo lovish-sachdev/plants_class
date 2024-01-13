@@ -1,7 +1,6 @@
 selenium
 bs4
 requests
-cv2
 pandas
 io
 pydrive
