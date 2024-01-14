@@ -34,15 +34,15 @@ def authenticate(mycreds):
     st.dataframe(df,hide_index=True)
     # app(df,drive)
 
-# def app(df,drive):
+def app(df,drive):
 
-#     # streamlit app
-#     # title 
-#     st.title("ॐ नमः शिवाय")
-#     df.rename(columns={"Unnamed: 0":"index"},inplace=True)
-#     st.dataframe(df,hide_index=True)
-#     sleep_time=st.slider(label="time difference in minute",min_value=2,max_value=8,value=5)
-#     progress_bar=st.progress(0,text="work_done")
+    # streamlit app
+    # title 
+    st.title("ॐ नमः शिवाय")
+    df.rename(columns={"Unnamed: 0":"index"},inplace=True)
+    st.dataframe(df,hide_index=True)
+    sleep_time=st.slider(label="time difference in minute",min_value=2,max_value=8,value=5)
+    progress_bar=st.progress(0,text="work_done")
     st.button(label="run",on_click=lambda:start(progress_bar,df,drive,sleep_time))
 
 
@@ -63,17 +63,16 @@ def start(progress_bar,df,drive,sleep_time):
 
 import streamlit as st
 import json,os
-st.title("om nama shivay")
 
-dir=os.path.dirname(os.path.abspath(__file__))
-json_path=os.path.join(dir,"index.json")
+# dir=os.path.dirname(os.path.abspath(__file__))
+# json_path=os.path.join(dir,"index.json")
 # data_path=os.path.join(dir,"data.xlsx")
 # data_save_folder=os.path.join(dir,"flower_leave_fruit_data")
 ## opening and reading index
 main()
-with open(json_path,"r") as json_file:
-    index_file=json.load(json_file)
-    index=index_file["index"]
-st.write(index)
+# with open(json_path,"r") as json_file:
+#     index_file=json.load(json_file)
+#     index=index_file["index"]
+# st.write(index)
 
 
