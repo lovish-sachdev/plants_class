@@ -46,7 +46,8 @@ def logic(link_data,drive):
     
     # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-    chromedriver_path=os.path.join(dir,"chromedriver.exe")
+    chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
+
     # driver=webdriver.Chrome(options=options)
     # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
