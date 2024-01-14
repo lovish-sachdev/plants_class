@@ -67,11 +67,13 @@ json_path=os.path.join(dir,"index.json")
 # data_path=os.path.join(dir,"data.xlsx")
 # data_save_folder=os.path.join(dir,"flower_leave_fruit_data")
 ## opening and reading index
-with open(json_path,"r") as json_file:
-    index_file=json.load(json_file)
-    index=index_file["index"]
-st.write(index)
-index_file["index"]+=1
-with open(json_path,"w") as json_file:
-    json.dump(index_file,json_file)
-st.write(index_file["index"])
+def function():
+    with open(json_path,"r") as json_file:
+        index_file=json.load(json_file)
+        index=index_file["index"]
+    st.write(index)
+    index_file["index"]+=1
+    with open(json_path,"w") as json_file:
+        json.dump(index_file,json_file)
+    st.write(index_file["index"])
+st.button(label="run",on_change=lambda:function()
