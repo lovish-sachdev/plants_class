@@ -41,8 +41,9 @@ def logic(link_data,drive):
     chrome_version = "120.0.6099.217"
     options=Options()
     options.add_argument("--headless=new")
-    # driver=webdriver.Chrome(options=options)
-    driver = webdriver.Chrome(ChromeDriverManager(chrome_type='chromium',version=chrome_version).install(), options=options)
+    # driver=webdriver.Chrome(options=options)driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+
+
 
     driver.get(web_link)
 
