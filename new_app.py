@@ -21,7 +21,7 @@ def logic(link_data,drive):
         index_file=json.load(json_file)
         index=index_file["index"]
     if index>=len(link_data):
-        return 
+        return index
     ## loading link_data
     # link_data=pd.read_excel(data_path,index_col=0)
     plant_data=link_data.iloc[index,:]
@@ -55,12 +55,12 @@ def logic(link_data,drive):
         imgs=card_body.find_elements(By.TAG_NAME,"img")
         for i in range(10):
             lenn=len(imgs)
-            if len(imgs)>100:
+            if len(imgs)>2:
                 break
             else:
                 imgs=card_body.find_elements(By.TAG_NAME,"img")
                 time.sleep(1)
-        for k in range(100):
+        for k in range(2):
             # img_path=os.path.join(imgs_save_path,name+"_"+str(k)+".png")
             img_link=(imgs[k].get_attribute("src"))
             img=BytesIO(requests.get(img_link).content)
@@ -81,3 +81,6 @@ def logic(link_data,drive):
     index_file["index"]+=1
     with open(json_path,"w") as json_file:
         json.dump(index_file,json_file)
+    return index_file["index"]
+
+        
