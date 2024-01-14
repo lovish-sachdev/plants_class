@@ -42,7 +42,8 @@ def logic(link_data,drive):
     options=Options()
     options.add_argument("--headless=new")
     chromedriver_path=os.path.join(dir,"chromedriver.exe")
-    driver=webdriver.Chrome(options=options)driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    # driver=webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
 
 
