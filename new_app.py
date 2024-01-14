@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as soup
 import json,requests
 from webdriver_manager.chrome import ChromeDriverManager
+
+from selenium.webdriver.chrome.service import Service
 import os,time
 import pandas as pd
 from selenium.webdriver.common.by import By
@@ -38,14 +40,18 @@ def logic(link_data,drive):
     folder.Upload()
 
     # initializing driver
-    chrome_version = "120.0.6099.217"
     options=Options()
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
+    # driver=webdriver.Chrome(options=options)
+    
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
     chromedriver_path=os.path.join(dir,"chromedriver.exe")
     # driver=webdriver.Chrome(options=options)
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
-
+    service = Service(executable_path=chromedriver_path)
+    driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(web_link)
 
