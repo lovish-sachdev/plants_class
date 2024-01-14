@@ -4,7 +4,7 @@ import os,json,io
 import pandas as pd
 from pydrive.drive import GoogleDrive
 from pydrive.auth import GoogleAuth
-# from new_app import logic
+from new_app import logic
 def main():
 
     file_path=os.path.abspath(__file__)
