@@ -32,7 +32,7 @@ def authenticate(mycreds):
     df = pd.read_csv(io.StringIO(content))
     
     st.dataframe(df,hide_index=True)
-    # app(df,drive)
+    app(df,drive)
 
 def app(df,drive):
 
