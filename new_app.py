@@ -39,12 +39,12 @@ def logic(link_data,drive):
     options=Options()
     options.add_argument("--headless=new")
     # driver=webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
     # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
-    service = Service(executable_path=chromedriver_path)
-    driver = webdriver.Chrome(service=service, options=options)
+    # service = Service(executable_path=chromedriver_path)
+    # driver = webdriver.Chrome(service=service, options=options)
 
 
     parent_folder_id = '17wFXsa_v_9sizZo-f4hDfMefZFusL9HM'
