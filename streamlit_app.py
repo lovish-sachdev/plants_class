@@ -43,15 +43,15 @@ def authenticate(mycreds):
 #     st.dataframe(df,hide_index=True)
 #     sleep_time=st.slider(label="time difference in minute",min_value=2,max_value=8,value=5)
 #     progress_bar=st.progress(0,text="work_done")
-#     st.button(label="run",on_click=lambda:start(progress_bar,df,drive,sleep_time))
+    st.button(label="run",on_click=lambda:start(progress_bar,df,drive,sleep_time))
 
 
-# def start(progress_bar,df,drive,sleep_time):
-#     # print("running")
-#     index=logic(df,drive)
-#     if index>=len(df):
-#         return 
-#     progress_bar.progress((index+1)/len(df),text=f"done {index+1} out of {len(df)}")
+def start(progress_bar,df,drive,sleep_time):
+    # print("running")
+    index=logic(df,drive)
+    if index>=len(df):
+        return 
+    progress_bar.progress((index+1)/len(df),text=f"done {index+1} out of {len(df)}")
 
 # if __name__=="__main__":
 #     main()
@@ -75,3 +75,5 @@ with open(json_path,"r") as json_file:
     index_file=json.load(json_file)
     index=index_file["index"]
 st.write(index)
+
+
