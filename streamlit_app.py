@@ -71,3 +71,7 @@ with open(json_path,"r") as json_file:
     index_file=json.load(json_file)
     index=index_file["index"]
 st.write(index)
+index_file["index"]+=1
+with open(json_path,"w") as json_file:
+    json.dump(index_file,json_file)
+st.write(index_file["index"])
