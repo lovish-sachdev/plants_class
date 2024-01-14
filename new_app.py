@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as soup
 import json,requests
+from webdriver_manager.chrome import ChromeDriverManager
 import os,time
 import pandas as pd
 from selenium.webdriver.common.by import By
@@ -39,7 +40,9 @@ def logic(link_data,drive):
     # initializing driver
     options=Options()
     options.add_argument("--headless=new")
-    driver=webdriver.Chrome(options=options)
+    # driver=webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
     driver.get(web_link)
 
     ## getting desired tags and classes
