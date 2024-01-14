@@ -59,5 +59,15 @@
 
 
 import streamlit as st
-
+import json
 st.title("om nama shivay")
+
+dir=os.path.dirname(os.path.abspath(__file__))
+json_path=os.path.join(dir,"index.json")
+# data_path=os.path.join(dir,"data.xlsx")
+# data_save_folder=os.path.join(dir,"flower_leave_fruit_data")
+## opening and reading index
+with open(json_path,"r") as json_file:
+    index_file=json.load(json_file)
+    index=index_file["index"]
+st.write(index)
