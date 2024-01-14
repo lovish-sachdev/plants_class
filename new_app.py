@@ -44,7 +44,7 @@ def logic(link_data,drive):
         print("ChromeDriver successfully installed at:", chrome_driver_path)
     except Exception as e:
         print("Error during ChromeDriver installation:", str(e))
-    return
+    return 0
     # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
