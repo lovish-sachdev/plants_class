@@ -76,4 +76,4 @@ def function():
     with open(json_path,"w") as json_file:
         json.dump(index_file,json_file)
     st.write(index_file["index"])
-st.button(label="run",on_change=lambda:function()
+st.button(label="run",on_change=lambda:function())
