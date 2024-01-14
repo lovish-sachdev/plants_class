@@ -49,9 +49,9 @@ def app(df,drive):
 def start(progress_bar,df,drive,sleep_time):
     # print("running")
     index=logic(df,drive)
-    print(index)
-    if index>=len(df):
-        return 
+    st.write(index)
+    # if index>=len(df):
+    #     return 
     progress_bar.progress((index+1)/len(df),text=f"done {index+1} out of {len(df)}")
 
 # if __name__=="__main__":
