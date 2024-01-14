@@ -42,17 +42,17 @@ def logic(link_data,drive):
     # initializing driver
     options=Options()
     options.add_argument("--headless=new")
-    # driver=webdriver.Chrome(options=options)
+    driver=webdriver.Chrome(options=options)
     
     # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-    chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
+    # chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
 
     # driver=webdriver.Chrome(options=options)
     # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
-    service = Service(executable_path=chromedriver_path)
-    driver = webdriver.Chrome(service=service, options=options)
+    # service = Service(executable_path=chromedriver_path)
+    # driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(web_link)
 
