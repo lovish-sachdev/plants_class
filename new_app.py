@@ -33,27 +33,27 @@ def logic(link_data,drive):
     # imgs_save_path=os.path.join(data_save_folder,plant_name)
     # os.makedirs(imgs_save_path,exist_ok=True)
     
+
+
+    # initializing driver
+    options=Options()
+    options.add_argument("--headless=new")
+    # driver=webdriver.Chrome(options=options)
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+    chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
+    # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    service = Service(executable_path=chromedriver_path)
+    driver = webdriver.Chrome(service=service, options=options)
+
+
     parent_folder_id = '17wFXsa_v_9sizZo-f4hDfMefZFusL9HM'
     # Create a folder inside the parent folder
     folder_metadata = {'title': plant_name, 'parents': [{'id': parent_folder_id}], 'mimeType': 'application/vnd.google-apps.folder'}
     folder = drive.CreateFile(folder_metadata)
     folder.Upload()
 
-    # initializing driver
-    options=Options()
-    options.add_argument("--headless=new")
-    driver=webdriver.Chrome(options=options)
     
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-
-    # chromedriver_path=os.path.join(dir,"chromedriver-win64\chromedriver-win64\chromedriver.exe")
-
-    # driver=webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
-
-    # service = Service(executable_path=chromedriver_path)
-    # driver = webdriver.Chrome(service=service, options=options)
-
     driver.get(web_link)
 
     ## getting desired tags and classes
