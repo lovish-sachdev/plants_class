@@ -10,6 +10,7 @@ dir_name=os.path.dirname(__file__)
 saved_model_path=os.path.join(dir_name,"saved models")
 saved_model_path=os.path.join(saved_model_path,"saved models")
 img_path=os.path.join(dir_name,"image.png")
+st.write(dir_name+"____"+saved_model_path+"___"+img_path)
 
 def run(image_url,model_name):
     
@@ -63,16 +64,25 @@ def main():
     capture = st.button("Capture Last Frame")
     frame_placeholder = st.empty()
     if access_camera:
-        cap = cv2.VideoCapture(0)
-        if not cap.isOpened():
-            st.error("Cannot access the camera.")
-        while True:
-            ret, frame = cap.read()
-            # img=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-            # frame_placeholder.image(img, caption="Live Camera Feed", use_column_width=True)
-            # frame=cv2.resize(frame,(224,224),interpolation=cv2.INTER_NEAREST)
-            # cv2.imwrite(img_path,frame)
-        cap.release()
+        # cap = cv2.VideoCapture(0)
+        # while True:
+        #     ret, frame = cap.read()
+        #     img=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        #     frame_placeholder.image(img, caption="Live Camera Feed", use_column_width=True)
+        #     frame=cv2.resize(frame,(224,224),interpolation=cv2.INTER_NEAREST)
+        #     cv2.imwrite(img_path,frame)
+        # cap.release()
+
+        img_file_buffer = st.camera_input("Take a picture")
+
+        if img_file_buffer is not None:
+            # To read image file buffer as bytes:
+            bytes_data = img_file_buffer.getvalue()
+            # Check the type of bytes_data:
+            # Should output: <class 'bytes'>
+            st.write(type(bytes_data))
+
+
     st_image=st.empty()
     st_text=st.empty()
     if capture:
