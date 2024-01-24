@@ -106,7 +106,7 @@ st.session_state.captured_image = None
 # Define a function to capture and store the image
 def capture_image():
     img_file_buffer = st.camera_input("Take a picture")
-    if image_file_buffer is not None:
+    if img_file_buffer is not None:
         img = Image.open(img_file_buffer)
         img_array = np.array(img)
         # Store the array in session state
