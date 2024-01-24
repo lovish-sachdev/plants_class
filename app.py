@@ -97,7 +97,6 @@
 # if __name__ == "__main__":
 #     main()
 
-
 import streamlit as st
 from PIL import Image
 import numpy as np
@@ -108,8 +107,12 @@ def capture_image():
     if img_file_buffer is not None:
         img = Image.open(img_file_buffer)
         img_array = np.array(img)
-        st.write(type(img_array))
-        st.write(img_array.shape)
+
+        st.write("Image Array Type:", type(img_array))
+        st.write("Image Array Shape:", img_array.shape)
+
+        st.image(img, caption="Captured Image")  # Display the captured image
 
 if st.button("Capture Image"):
-    capture_image()
+    with st.spinner("Processing Image..."):  # Show a spinner while processing
+        capture_image()
