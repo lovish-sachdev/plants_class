@@ -64,12 +64,6 @@ def main():
     if img_file_buffer is not None:
             img = Image.open(img_file_buffer)
             img_array = np.array(img)
-            st.write(type(img_array))
-            st.write(img_array.shape)
-
-
-
-
-if __name__ == "__main__":
-    main()
-
+            model,description,class_label=get_model(model_name)
+            prediction,predicted=make_predictions(model,img_array,class_label)
+            st.write(str(predicted)+"__"+str(prediction))
