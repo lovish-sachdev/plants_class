@@ -67,3 +67,4 @@ def main():
             model,description,class_label=get_model(model_name)
             prediction,predicted=make_predictions(model,img_array,class_label)
             st.write(str(predicted)+"__"+str(prediction))
+main()
