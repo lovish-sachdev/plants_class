@@ -97,22 +97,26 @@
 # if __name__ == "__main__":
 #     main()
 
+
 import streamlit as st
 from PIL import Image
 import numpy as np
 
+
+# Define a function to capture and store the image
 def capture_image():
     img_file_buffer = st.camera_input("Take a picture")
+    img = Image.open(img_file_buffer)
+    img_array = np.array(img)
+    # Store the array in session state
+    st.session_state.captured_image = img_array
 
-    if img_file_buffer is not None:
-        img = Image.open(img_file_buffer)
-        img_array = np.array(img)
-
-        st.write("Image Array Type:", type(img_array))
-        st.write("Image Array Shape:", img_array.shape)
-
-        st.image(img, caption="Captured Image")  # Display the captured image
-
+# Button to trigger capture
 if st.button("Capture Image"):
-    with st.spinner("Processing Image..."):  # Show a spinner while processing
-        capture_image()
+    capture_image()
+
+# Later in your app, access and display the stored image
+if st.session_state.captured_image is not None:
+    # Convert NumPy array back to PIL Image (if needed)
+    img = Image.fromarray(st.session_state.captured_image)
+    st.image(img, caption="Captured Image")
