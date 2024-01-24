@@ -64,6 +64,8 @@ def main():
     frame_placeholder = st.empty()
     if access_camera:
         cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            st.error("Cannot access the camera.")
         while True:
             ret, frame = cap.read()
             # img=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
