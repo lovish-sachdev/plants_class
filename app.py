@@ -10,32 +10,45 @@ dir_name=os.path.dirname(__file__)
 saved_model_path=os.path.join(dir_name,"saved models")
 saved_model_path=os.path.join(saved_model_path,"saved models")
 img_path=os.path.join(dir_name,"image.png")
-st.write(dir_name+"____"+saved_model_path+"___"+img_path)
 
-def run(image_url,model_name):
-    
-    if image_url.startswith("data"):
-        _,encoded_data=image_url.split(",",1)
-        decoded_data=base64.b64decode(encoded_data)
-        # Convert the binary data to an image
-        img=Image.open(BytesIO(decoded_data))
+def run(image_url,model_name,st_image,st_text):
+    if type(image_url)==str:
+        if image_url.startswith("data"):
+            _,encoded_data=image_url.split(",",1)
+            decoded_data=base64.b64decode(encoded_data)
+            # Convert the binary data to an image
+            img=Image.open(BytesIO(decoded_data))
+            np_img=np.array(img)
+            np_img=cv2.resize(np_img,(224,224),interpolation=cv2.INTER_NEAREST)
+            img_array_expanded=np.expand_dims(np_img,axis=0)
+            model,description,class_label=get_model(model_name)
+            prediction,predicted=make_predictions(model,img_array_expanded,class_label)
+            st_image.image(np_img)
+            st_text.text(str(predicted)+"__"+str(prediction))
+        elif image_url.startswith("http"):
+            response=requests.get(image_url)
+            img = np.frombuffer(response.content, np.uint8)
+            img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+            img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+            np_img=cv2.resize(img,(224,224),interpolation=cv2.INTER_NEAREST)
+            img_array_expanded=np.expand_dims(np_img,axis=0)
+            model,description,class_label=get_model(model_name)
+            prediction,predicted=make_predictions(model,img_array_expanded,class_label)
+            st_image.image(np_img)
+            st_text.text(str(predicted)+"__"+str(prediction))
+        else:
+            st.error('This is an error there is problem with url pass url starting with data or http only')
+    else:
+        
+        bytes_data = image_url.getvalue()
+        img=Image.open(BytesIO(bytes_data))
         np_img=np.array(img)
         np_img=cv2.resize(np_img,(224,224),interpolation=cv2.INTER_NEAREST)
-        np_img=np.expand_dims(np_img,axis=0)
+        img_array_expanded=np.expand_dims(np_img,axis=0)
         model,description,class_label=get_model(model_name)
-        prediction,label=make_predictions(model,np_img,class_label)
-        st.write(prediction,label)
-        st.image(np_img, caption="Your Image Caption", use_column_width=True)
-    else:
-        img=cv2.imread(image_url)
-        img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-        np_img=cv2.resize(img,(224,224),interpolation=cv2.INTER_NEAREST)
-
-        model,description,class_label=get_model(model_name)
-        prediction,label=make_predictions(model,np_img,)
-        st.write(prediction,label)
-        st.image(np_img, caption="Your Image Caption", use_column_width=True)
-
+        prediction,predicted=make_predictions(model,img_array_expanded,class_label)
+        st_image.image(np_img)
+        st_text.text(str(predicted)+"__"+str(prediction))
 def  get_model(name,model_path=saved_model_path):
     folder=os.path.join(model_path,name)
     descri_label=os.path.join(folder,"description.json")
@@ -54,20 +67,29 @@ def main():
     
     st.title("OM NAMAH SHIVAY")
     image_url=st.text_input("inter image url")
+    uploaded_file=st.file_uploader("upload a file containing a flower or fruit",type=["png","jpg"])
     
     model_names=os.listdir(saved_model_path)
-    
+    if image_url!=None and image_url.strip()!="":
+        runner=image_url
+    else:
+        runner=uploaded_file
     model_name=st.selectbox("select model",model_names)
-    st.button("run",on_click=lambda:run(image_url,model_name))
-
+    st_image=st.empty()
+    st_text=st.empty()
+    button=st.button("run")
+    if button:
+        run(runner,model_name,st_image=st_image,st_text=st_text)
     img_file_buffer = st.camera_input("Take a picture")
+    
     if img_file_buffer is not None:
             img = Image.open(img_file_buffer)
             img_array = np.array(img)
             img_array=cv2.resize(img_array,(224,224),interpolation=cv2.INTER_NEAREST)
-            img_array=np.expand_dims(img_array,axis=0)
+            img_array_expanded=np.expand_dims(img_array,axis=0)
             model,description,class_label=get_model(model_name)
-            prediction,predicted=make_predictions(model,img_array,class_label)
-            st.write(str(predicted)+"__"+str(prediction))
+            prediction,predicted=make_predictions(model,img_array_expanded,class_label)
+            st_image.image(img_array)
+            st_text.text(str(predicted)+"__"+str(prediction))
 
 main()
