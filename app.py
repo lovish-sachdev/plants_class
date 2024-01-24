@@ -64,7 +64,10 @@ def main():
     if img_file_buffer is not None:
             img = Image.open(img_file_buffer)
             img_array = np.array(img)
+            img_array=cv2.resize(img_array,(224,224),interpolation=INTER_NEAREST)
+            img_array=np.expand_dims(img_array,axis=0)
             model,description,class_label=get_model(model_name)
             prediction,predicted=make_predictions(model,img_array,class_label)
             st.write(str(predicted)+"__"+str(prediction))
+
 main()
