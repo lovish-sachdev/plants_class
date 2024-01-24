@@ -101,7 +101,7 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-
+st.session_state.captured_image = None
 
 # Define a function to capture and store the image
 def capture_image():
