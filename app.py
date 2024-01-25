@@ -28,16 +28,19 @@ def run(image_url,model_name,st_image,st_text):
             st_text.text(str(predicted)+"__"+str(prediction))
         elif image_url.startswith("http"):
             response=requests.get(image_url)
-            img = np.frombuffer(response.content, np.uint8)
-            img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-            img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-            np_img=cv2.resize(img,(224,224),interpolation=cv2.INTER_NEAREST)
-            img_array_expanded=np.expand_dims(np_img,axis=0)
-            img_array_expanded=img_array_expanded/255.
-            model,description,class_label=get_model(model_name)
-            prediction,predicted=make_predictions(model,img_array_expanded,class_label)
-            st_image.image(np_img)
-            st_text.text(str(predicted)+"__"+str(prediction))
+            if response.status_code==200:
+                img = np.frombuffer(response.content, np.uint8)
+                img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+                img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+                np_img=cv2.resize(img,(224,224),interpolation=cv2.INTER_NEAREST)
+                img_array_expanded=np.expand_dims(np_img,axis=0)
+                img_array_expanded=img_array_expanded/255.
+                model,description,class_label=get_model(model_name)
+                prediction,predicted=make_predictions(model,img_array_expanded,class_label)
+                st_image.image(np_img)
+                st_text.text(str(predicted)+"__"+str(prediction))
+            else:
+                st_text.text("cannot access url")
         else:
             st.error('This is an error there is problem with url pass url starting with data or http only')
     else:
