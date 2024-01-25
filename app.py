@@ -21,6 +21,7 @@ def run(image_url,model_name,st_image,st_text):
             np_img=np.array(img)
             np_img=cv2.resize(np_img,(224,224),interpolation=cv2.INTER_NEAREST)
             img_array_expanded=np.expand_dims(np_img,axis=0)
+            img_array_expanded/=255.
             model,description,class_label=get_model(model_name)
             prediction,predicted=make_predictions(model,img_array_expanded,class_label)
             st_image.image(np_img)
@@ -32,6 +33,7 @@ def run(image_url,model_name,st_image,st_text):
             img=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
             np_img=cv2.resize(img,(224,224),interpolation=cv2.INTER_NEAREST)
             img_array_expanded=np.expand_dims(np_img,axis=0)
+            img_array_expanded/=255.
             model,description,class_label=get_model(model_name)
             prediction,predicted=make_predictions(model,img_array_expanded,class_label)
             st_image.image(np_img)
@@ -45,6 +47,8 @@ def run(image_url,model_name,st_image,st_text):
         np_img=np.array(img)
         np_img=cv2.resize(np_img,(224,224),interpolation=cv2.INTER_NEAREST)
         img_array_expanded=np.expand_dims(np_img,axis=0)
+        img_array_expanded/=255.
+        
         model,description,class_label=get_model(model_name)
         prediction,predicted=make_predictions(model,img_array_expanded,class_label)
         st_image.image(np_img)
@@ -98,6 +102,8 @@ def main():
                 img_array = np.array(img)
                 img_array=cv2.resize(img_array,(224,224),interpolation=cv2.INTER_NEAREST)
                 img_array_expanded=np.expand_dims(img_array,axis=0)
+                img_array_expanded/=255.
+
                 model,description,class_label=get_model(model_name)
                 prediction,predicted=make_predictions(model,img_array_expanded,class_label)
                 st_image.image(img_array)
