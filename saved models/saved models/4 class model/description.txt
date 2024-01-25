@@ -1,0 +1,1 @@
+model 1 which classifies 4 classes with 94 % accuracy with all 3 folders of a and 1 of banana
