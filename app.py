@@ -64,7 +64,7 @@ def  get_model(name,model_path=saved_model_path):
         descri_label=json.load(f)
     description=descri_label["description"]
     class_label=descri_label["class_label"]
-    model=tf.keras.models.load_model(os.path.join(folder,"model.h5"))
+    model=tf.keras.models.load_model(os.path.join(folder,"model.h5"),custom_objects={'KerasLayer':hub.KerasLayer})
     return model,description,class_label
 
 def make_predictions(model,image,class_label):
