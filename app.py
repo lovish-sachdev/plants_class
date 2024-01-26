@@ -59,9 +59,9 @@ def run(image_url,model_name,st_image,st_text):
         st_text.text(str(predicted)+"__"+str(prediction))
 def  get_model(name,model_path=saved_model_path):
     folder=os.path.join(model_path,name)
-    descri_label=os.path.join(folder,"description.json")
+    descri_label_path=os.path.join(folder,"description.json")
     
-    with open (descri_label,"r") as f:
+    with open (descri_label_path,"r") as f:
         descri_label=json.load(f)
     description=descri_label["description"]
     class_label=descri_label["class_label"]
