@@ -5,6 +5,7 @@ from PIL import Image
 import numpy as np
 from io import BytesIO
 import tensorflow as tf
+import tensorflow_hub as hub
 
 dir_name=os.path.dirname(__file__)
 saved_model_path=os.path.join(dir_name,"saved models")
